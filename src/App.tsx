@@ -5,6 +5,7 @@ import SERVER_IP from './config';
 function App() {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState<string[]>([]);
+    const [activeTab, setActiveTab] = useState('clipboard');
 
     const IP = SERVER_IP;
 
@@ -69,33 +70,54 @@ function App() {
         fetchMessages();
     }, [fetchMessages]);
 
+    const renderTabContent = () => {
+        switch (activeTab) {
+            case 'clipboard':
+                return (
+                    <div className="clipboard">
+                        <div className="input-container">
+                            <input
+                                type="text"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                placeholder="在这里输入你的消息..."
+                            />
+                            <button onClick={handleSendMessage}>发送消息</button>
+                        </div>
+                        <h2>剪切板：</h2>
+                        <ul>
+                            {messages.map((msg, index) => (
+                                <li key={index}>
+                                    <div className="message-container">
+                                        <div className="message-text" title={msg}>
+                                            {msg.length > 10 ? msg.slice(0, 10) + '...' : msg}
+                                        </div>
+                                        <button onClick={() => handleCopyMessage(msg)}>复制消息</button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            case 'imageLibrary':
+                return <div>图片库内容</div>;
+            case 'fileTransfer':
+                return <div>文件传输内容</div>;
+            default:
+                return null;
+        }
+    };
+
     return (
         <div className="App">
             <header className="App-header">
-                <div className="input-container">
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="在这里输入你的消息..."
-                    />
-                    <button onClick={handleSendMessage}>发送消息</button>
+                <div className="navbar">
+                    <button onClick={() => setActiveTab('clipboard')}>剪切板</button>
+                    <button onClick={() => setActiveTab('imageLibrary')}>图片库</button>
+                    <button onClick={() => setActiveTab('fileTransfer')}>文件传输</button>
                 </div>
-                <div>
-                    <h3>消息列表：</h3>
-                    <ul>
-                        {messages.map((msg, index) => (
-                            <li key={index}>
-                                <div className="message-container">
-                                    <div className="message-text" title={msg}>
-                                        {msg.length > 10 ? msg.slice(0, 10) + '...' : msg}
-                                    </div>
-                                    <button onClick={() => handleCopyMessage(msg)}>复制消息</button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+
+                {renderTabContent()}
             </header>
         </div>
     );

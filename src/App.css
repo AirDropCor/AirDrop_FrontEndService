@@ -1,16 +1,12 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  padding: 20px;
 }
 
 .App-header {
@@ -24,23 +20,82 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar {
+  position: fixed;
+  top: 30px;
+  width: max-content;
+  background-color: cadetblue;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  border-radius: 20px;
+  z-index: 9999; /* Ensure it's above other elements */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar button.active {
+  border-bottom-color: white;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex: 1;
+}
+
+.input-container button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .message-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 4px;
 }
 
 .message-text {
@@ -50,38 +105,25 @@
   text-overflow: ellipsis;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-/* 添加样式到输入框和按钮的外层容器 */
-.input-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 样式输入框 */
-.input-container input[type="text"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  flex: 1;
-  font-size: 16px;
-}
-
-/* 样式按钮 */
-.input-container button {
-  padding: 10px 20px;
+.message-container button {
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.message-container button:hover {
+  background-color: #0056b3;
+}
+
+.clipboard {
+  position: relative;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
